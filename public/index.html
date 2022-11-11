@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud To-Do</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav>
+
+    </nav>
+
+    <section id="notSignedIn">
+
+        <h2>Hi Welcome to cloud to do app!</h2>
+        <p>Please sign in to asses your saved to-do list.</p>
+
+        <button id="signin">Sign in with Google</button>
+
+    </section>
+
+    <section id ="signedIn">
+
+        <button id="signout">Sign Out</button><br>
+        <h3 id = "custom-text"></h3>
+
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyA2Lwn3fndiy2wHDm_GjR5DGUYa5ie6tU4",
+          authDomain: "cloud-todo-eee7f.firebaseapp.com",
+          projectId: "cloud-todo-eee7f",
+          storageBucket: "cloud-todo-eee7f.appspot.com",
+          messagingSenderId: "133830750242",
+          appId: "1:133830750242:web:112cda1ed664b047fb9a7b"
+        };
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+      <script src="app.js"></script>
+</body>
+</html>
