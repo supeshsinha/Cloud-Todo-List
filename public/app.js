@@ -8,6 +8,7 @@ const submitButton = document.querySelector('#createdata');
 const displaySection = document.querySelector('#listdata');
 const titleInput = document.querySelector('#todotitle');
 const descriptionInput = document.querySelector('#tododes');
+const topRightBtn = document.querySelector('.end');
 
 
 const auth = firebase.auth();
@@ -24,17 +25,20 @@ signOutBtn.addEventListener('click',function(){
     console.log("sign out clicked");
 });
 
+
 auth.onAuthStateChanged(user => {
     if (user){
         //When signed in
         signedInSection.style.display = "block";
         signedOutSection.style.display = "none";
-        paragraph.innerText = `Hi ${user.displayName}, Welcome to your personal To-do :)`
+        paragraph.innerText = `Hi ${user.displayName}, Welcome to your personal To-do 🙂`
+        topRightBtn.innerText = `Hi ${user.displayName}`;
     }
     else{
         //When not signed in
         signedInSection.style.display = "none";
         signedOutSection.style.display = "block";
+        topRightBtn.innerText = `SignIn`;
 
     }
 });
@@ -42,7 +46,7 @@ auth.onAuthStateChanged(user => {
 const db = firebase.firestore();
 let reference;
 let unsubscribe;
-let c=1;
+let c=0;
 submitButton.addEventListener('click',console.log("worked"));
 auth.onAuthStateChanged(user => {
     if (user){
@@ -66,9 +70,10 @@ auth.onAuthStateChanged(user => {
                         .orderBy('createdAt')
                         .onSnapshot(querySnapshot =>{
                             const items = querySnapshot.docs.map(doc => {
+                                c++;
                                 return `
                                 <tr>
-                                <td>8</td>
+                                <td>${c}</td>
                                 <td>${doc.data().Title}</td>
                                 <td>${doc.data().Description}</td>
                                 </tr>
