@@ -73,18 +73,19 @@ auth.onAuthStateChanged(user => {
                                 c++;
                                 return `
                                 <tr>
-                                <td>${c}</td>
-                                <td>${doc.data().Title}</td>
-                                <td>${doc.data().Description}</td>
+                                <td class="left">${c}</td>
+                                <td class="mid">${doc.data().Title}</td>
+                                <td class="right">${doc.data().Description}</td>
                                 </tr>
                                 `
                             });
+                            c=0;
 
                             displaySection.innerHTML= `
                             <tr>
-                            <th>Sr. No.</th>
-                            <th>Title</th>
-                            <th>Description</th>
+                            <th class="left">Sr. No.</th>
+                            <th class="mid">Title</th>
+                            <th class="right">Description</th>
                             </tr>
                             ` + items.join('');
                             console.log("hi there");

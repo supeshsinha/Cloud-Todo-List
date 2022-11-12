@@ -13,6 +13,7 @@ body{
     font-family: "Open Sans";
 }
 .container{
+    width: 100%;
     max-width: 800px;
     background-color: whitesmoke;
     margin: auto;
@@ -108,7 +109,27 @@ input{
     background-color: rgb(40, 40, 148);
 }
 table{
-    margin: auto;
+    margin: 25px 10px;
+    width: 100%;
     font-size: 1.2em;
-    border-spacing: 50px 15px;
+    
 }
+.left{
+    margin-right: 8px;
+}
+.right{
+    margin-left: 8px;
+}
+
+@media all and (max-width: 480px) {
+    .flex{
+        display: block;
+    }
+    input{
+        display: block;
+        margin: auto;
+    }
+    .container{
+        margin-top: 0;
+    }
+  }
