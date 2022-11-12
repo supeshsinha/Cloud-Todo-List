@@ -42,7 +42,7 @@ auth.onAuthStateChanged(user => {
 const db = firebase.firestore();
 let reference;
 let unsubscribe;
-
+let c=1;
 submitButton.addEventListener('click',console.log("worked"));
 auth.onAuthStateChanged(user => {
     if (user){
@@ -60,5 +60,29 @@ auth.onAuthStateChanged(user => {
 
             console.log("Create Button Clicked");
         });
+
+        unsubscribe = reference
+                        .where('uid','==',user.uid)
+                        .orderBy('createdAt')
+                        .onSnapshot(querySnapshot =>{
+                            const items = querySnapshot.docs.map(doc => {
+                                return `
+                                <tr>
+                                <td>8</td>
+                                <td>${doc.data().Title}</td>
+                                <td>${doc.data().Description}</td>
+                                </tr>
+                                `
+                            });
+
+                            displaySection.innerHTML= `
+                            <tr>
+                            <th>Sr. No.</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            </tr>
+                            ` + items.join('');
+                            console.log("hi there");
+                        });
     }
 });
