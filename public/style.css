@@ -120,6 +120,10 @@ table{
 .right{
     margin-left: 8px;
 }
+td img{
+    height: 1.2em;
+    cursor: pointer;
+}
 
 @media all and (max-width: 480px) {
     .flex{

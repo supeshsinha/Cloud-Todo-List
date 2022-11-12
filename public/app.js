@@ -25,6 +25,17 @@ signOutBtn.addEventListener('click',function(){
     console.log("sign out clicked");
 });
 
+function del(parameter){
+    console.log("del function");
+    db.collection('todo')
+    .where('Description','==',parameter)
+    .get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          doc.ref.delete();
+        });
+      });
+}
+
 
 auth.onAuthStateChanged(user => {
     if (user){
@@ -47,6 +58,8 @@ const db = firebase.firestore();
 let reference;
 let unsubscribe;
 let c=0;
+let elementId = [];
+elementId[0] = 0;
 submitButton.addEventListener('click',console.log("worked"));
 auth.onAuthStateChanged(user => {
     if (user){
@@ -62,8 +75,13 @@ auth.onAuthStateChanged(user => {
                 createdAt: serverTimestamp(),
             });
 
+            titleInput.value = "";
+            descriptionInput.value = "";
+
             console.log("Create Button Clicked");
         });
+
+
 
         unsubscribe = reference
                         .where('uid','==',user.uid)
@@ -76,6 +94,7 @@ auth.onAuthStateChanged(user => {
                                 <td class="left">${c}</td>
                                 <td class="mid">${doc.data().Title}</td>
                                 <td class="right">${doc.data().Description}</td>
+                                <td><img src="./img/delete.svg" onclick="del('${doc.data().Description}')"></td>
                                 </tr>
                                 `
                             });
@@ -86,9 +105,12 @@ auth.onAuthStateChanged(user => {
                             <th class="left">Sr. No.</th>
                             <th class="mid">Title</th>
                             <th class="right">Description</th>
+                            <th>Delete</th>
                             </tr>
                             ` + items.join('');
                             console.log("hi there");
                         });
+    }else{
+        unsubscribe && unsubscribe();
     }
 });
