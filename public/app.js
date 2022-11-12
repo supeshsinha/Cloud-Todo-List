@@ -4,6 +4,11 @@ const paragraph = document.querySelector('#custom-text');
 
 const signInBtn = document.querySelector('#signin');
 const signOutBtn = document.querySelector('#signout');
+const submitButton = document.querySelector('#createdata');
+const displaySection = document.querySelector('#listdata');
+const titleInput = document.querySelector('#todotitle');
+const descriptionInput = document.querySelector('#tododes');
+
 
 const auth = firebase.auth();
 
@@ -31,5 +36,29 @@ auth.onAuthStateChanged(user => {
         signedInSection.style.display = "none";
         signedOutSection.style.display = "block";
 
+    }
+});
+
+const db = firebase.firestore();
+let reference;
+let unsubscribe;
+
+submitButton.addEventListener('click',console.log("worked"));
+auth.onAuthStateChanged(user => {
+    if (user){
+        //When signed in
+        reference = db.collection('todo');
+        submitButton.addEventListener('click',function(){
+            const { serverTimestamp } = firebase.firestore.FieldValue;
+
+            reference.add({
+                uid: user.uid,
+                Title: titleInput.value,
+                Description: descriptionInput.value,
+                createdAt: serverTimestamp(),
+            });
+
+            console.log("Create Button Clicked");
+        });
     }
 });
